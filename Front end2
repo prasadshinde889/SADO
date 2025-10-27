@@ -1,0 +1,12 @@
+body {
+  background: linear-gradient(90deg, #004D98 30%, #A50044 70%);
+  color: #FDC52C;
+}
+h1, h2, h3 {
+  color: #FDC52C !important;
+}
+button {
+  background-color: #A50044 !important;
+  color: white !important;
+  border-radius: 12px !important;
+}
