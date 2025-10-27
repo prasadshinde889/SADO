@@ -1,0 +1,15 @@
+import random
+
+def predict_match(data):
+    base_home = data.home_team_strength * 0.6 + data.home_form_last5 * 40 - data.home_injury_index * 20
+    base_away = data.away_team_strength * 0.6 + data.away_form_last5 * 40 - data.away_injury_index * 20
+    prob_home = round(base_home / (base_home + base_away + 1), 2)
+    prob_away = round(base_away / (base_home + base_away + 1), 2)
+    prob_draw = round(1 - (prob_home + prob_away), 2)
+    return {
+        "home_win_probability": prob_home,
+        "draw_probability": prob_draw,
+        "away_win_probability": prob_away,
+        "predicted_scoreline": f"{random.randint(1,3)}-{random.randint(0,2)}",
+        "confidence": round(random.uniform(0.7, 0.95), 2)
+    }
