@@ -1,0 +1,42 @@
+import streamlit as st
+import requests
+
+st.set_page_config(page_title="S.A.D.O - Football Predictor", page_icon="⚽", layout="wide")
+
+st.markdown(
+    '<link rel="stylesheet" href="assets/barcelona_theme.css">',
+    unsafe_allow_html=True
+)
+
+st.title("⚽ S.A.D.O - Smart AI Data Outcome Predictor")
+st.caption("Live football match predictions powered by open data")
+
+st.sidebar.header("Match Setup")
+home_team_strength = st.sidebar.slider("Home Team Strength", 0, 100, 80)
+away_team_strength = st.sidebar.slider("Away Team Strength", 0, 100, 75)
+home_form_last5 = st.sidebar.slider("Home Form (0-1)", 0.0, 1.0, 0.8)
+away_form_last5 = st.sidebar.slider("Away Form (0-1)", 0.0, 1.0, 0.6)
+home_injury_index = st.sidebar.slider("Home Injury Index (0-1)", 0.0, 1.0, 0.1)
+away_injury_index = st.sidebar.slider("Away Injury Index (0-1)", 0.0, 1.0, 0.2)
+
+if st.button("🔮 Predict Match Outcome"):
+    payload = {
+        "home_team_strength": home_team_strength,
+        "away_team_strength": away_team_strength,
+        "home_form_last5": home_form_last5,
+        "away_form_last5": away_form_last5,
+        "home_injury_index": home_injury_index,
+        "away_injury_index": away_injury_index
+    }
+    try:
+        r = requests.post("https://sado-backend.onrender.com/predict", json=payload)
+        result = r.json()
+        st.success("✅ Prediction Complete")
+        st.subheader("Result")
+        st.write(f"🏆 Home Win: {result['home_win_probability']*100}%")
+        st.write(f"🤝 Draw: {result['draw_probability']*100}%")
+        st.write(f"⚔️ Away Win: {result['away_win_probability']*100}%")
+        st.metric("Predicted Scoreline", result['predicted_scoreline'])
+        st.progress(result['confidence'])
+    except Exception:
+        st.error("⚠️ Could not reach backend. Ensure FastAPI is running.")
