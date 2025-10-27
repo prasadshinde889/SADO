@@ -1,0 +1,18 @@
+from fastapi import FastAPI
+from pydantic import BaseModel
+from utils.model import predict_match
+
+app = FastAPI(title="SADO AI Predictor")
+
+class MatchData(BaseModel):
+    home_team_strength: float
+    away_team_strength: float
+    home_form_last5: float
+    away_form_last5: float
+    home_injury_index: float
+    away_injury_index: float
+
+@app.post("/predict")
+def predict(data: MatchData):
+    result = predict_match(data)
+    return result
