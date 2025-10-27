@@ -1,0 +1,19 @@
+SADO/
+├── backend/
+│   ├── main.py
+│   ├── requirements.txt
+│   └── utils/
+│       └── model.py
+│
+├── frontend/
+│   ├── streamlit_app.py
+│   ├── requirements.txt
+│   └── assets/
+│       └── barcelona_theme.css
+│
+├── .github/
+│   └── workflows/
+│       └── build-apk.yml
+│
+├── README.md
+└── .gitignore
