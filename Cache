@@ -1,0 +1,11 @@
+---
+
+Once all files are uploaded to GitHub:
+1. Add the secret `PWA_URL` = your Streamlit app URL  
+2. Go to **Actions → Build APK → Run workflow**  
+3. Download your `sado-apk` artifact  
+4. Install it on Android 🎉  
+
+---
+
+Would you like me to now write the **exact deployment steps to Streamlit Cloud and Render** (so you get your live backend URL and frontend `https://sado.streamlit.app` to plug into the APK builder)?
